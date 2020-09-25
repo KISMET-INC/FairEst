@@ -27,7 +27,6 @@ li {
 .coat {
     padding: 10px;
     margin: 20px;
-    border: 3px solid  #E1F4A2 ;
     display:flex;
     border-radius: 10px;
     justify-content: space-between;
@@ -40,8 +39,9 @@ li {
     
 }
 img.coat_img {
-    width: 200px;
-    height: 200px;
+    transform: rotate(10deg);
+    border-radius: 30px;
+    height: 200px
 }
 
 p.examples {
@@ -50,7 +50,7 @@ p.examples {
 }
 
 .coat_card {
-    background-color: #B4CB65 ;
+    background-color: rgb(180, 204, 102, 0.7) ;
     border-radius: 10px;
     margin-bottom:20px;
     

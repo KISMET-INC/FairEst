@@ -9,7 +9,7 @@
 .light {
     width:550px;
     padding: 50px;
-    height: 350px;
+    height: 400px;
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.5);
 }
@@ -21,8 +21,8 @@
 
 p.title {
     margin: 10px 0px;
-    color:#9D344B;
-    font-size: 17px;
+    color:#637A14;
+    font-size: 20px;
     font-family: var(--logo);
 }
 
@@ -42,4 +42,9 @@ i.brand {
 
 a.btn {
     margin-top: 20px;
+}
+
+.buttons {
+    justify-content: space-around;
+    display:flex;
 }

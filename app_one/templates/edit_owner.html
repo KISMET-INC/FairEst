@@ -17,19 +17,19 @@
 <body>
 
     <div id="CANVAS_long">
+
         <div id="TOP_long">
             <nav>
                 <div class="nav_left">
-                    <h2 class = 'h2_nav'> FAIR<i class="fa fa-handshake-o nav"></i>EST</h2>
+                    <h2 class = 'nav_logo'> FAIR<i class="fa fa-handshake-o nav"></i>EST</h2>
                     <a class = 'nav_right h2_nav' href = '/dashboard'>Dashboard</a>
-                    <!-- <a href='/dashboard' class = 'h2_nav'> Home</p> -->
+                    <a href='/dashboard' class = 'h2_nav'> Home</a>
                 </div>
                 <div class="nav_right">
-                    <a class = 'nav_right h2_nav' href = '/signin'>Sign in</a>
+                    <!-- <a class = 'nav_right h2_nav' href = '/signin'>Sign in</a> -->
                 </div>
             </nav>
         </div>
-
 
 
         <div id="interface_block_two">
@@ -69,24 +69,26 @@
             
             <div id="right_main"> 
                 <div class="owner">
-                    <div class="o_left">
-                    </div>
+
                     <div class="o_right">
                         <h2>{{owner.first}} {{owner.last}}</h2>
                         <p>{{owner.email}}</p> 
                         <p>{{owner.phone}}</p> 
                         <p>{{owner.notes}}</p> 
                 <a href = '/process_delete_owner/{{owner.id}}'>Delete Owner</a>
+                <div class="dog_list">
+                    <h3>Dogs: {{owner.dogs.all.count}}</h3>
+                    {% for dog in owner.dogs.all %}
+                    <span>{{dog.name}} | <a href ='/process_remove_dog/{{dog.id}}/{{redirect_key}}/{{quote_id}}/{{estimate_id}}'>Delete </a> </span>
+                    {% endfor %}
+                    </div>
+    
+
+
                     </div>
                 </div>
 
-                <div class="dog_list">
-                <h3>Dogs: {{owner.dogs.all.count}}</h3>
-                {% for dog in owner.dogs.all %}
-                <span>{{dog.name}} | <a href ='/process_remove_dog/{{dog.id}}/{{redirect_key}}/{{quote_id}}/{{estimate_id}}'>Delete </a> </span>
-                {% endfor %}
-                </div>
-
+                
                 <img class = 'icon3' src = '/static/images/backdog.gif' >
 
             </div>    <!-- END RIGHT_MAIN -->  

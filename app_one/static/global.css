@@ -20,13 +20,15 @@ a {
     color:#C46277;
 }
 a.btn-primary {
-    background-color:#637A14;
-    border: 2px solid #8AA236;
+    background-color:#8AA236;
+    border: 2px solid #637A14;
 }
 
 ul.messages {
+    list-style: none;
     color:red;
-    padding-left: 100px;
+    padding-left: 0px;
+    margin-left: 0px;
     width: 100%;
 }
 
@@ -50,7 +52,12 @@ button {
 #CANVAS_long {
     background-color:purple;
 }
-
+.nav_logo{
+    font-size: 30px;
+    font-weight: lighter;
+    margin-left: 65px;
+    color:#E1F4A2;
+}
 
 /* CANVAS NAV BAR */
 nav {
@@ -63,8 +70,9 @@ nav {
 }
 
 nav .h2_nav {
-    font-size:25;
+    font-size:18px;
     margin-left:65px;
+    margin-top:6px;
     color:#E1F4A2;
     margin-right: 10px;
     height:fit-content;
@@ -180,7 +188,7 @@ textarea.form_textarea {
     display:inline-block;
     border: 2px solid black;
     vertical-align: top;
-    width: 70%;
+    width: 60%;
     height: 70px;
 }
 
@@ -340,6 +348,10 @@ tr:nth-child(even){
     background-color: #dddddd;
 
 }
+tr:nth-child(odd){
+    background-color: rgb(255, 255, 255,.7);
+
+}
 
 th.id {
     width:2%;
@@ -468,4 +480,8 @@ a.in_page {
 
 .logo {
     font-size: 50px;
+}
+
+a.no_un {
+    text-decoration: none;
 }

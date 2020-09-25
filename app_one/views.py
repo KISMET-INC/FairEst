@@ -462,6 +462,8 @@ def init_db_objects(request):
     post = request.POST
     print(post)
 
+    if len(Owner.objects.all()) == 0:
+        return redirect('/add_first_estimate')
 
     return redirect('/dashboard')
 
@@ -544,13 +546,13 @@ def process_add_quote_to_estimate(request, estimate_id):
 
     if(post['pet_name'] != ''):
         this_price_book = Price_Book.objects.get(id=1)
-        bath_service = Service.objects.get(name = 'Bath')
+        service = Service.objects.get(name = post['service'])
         coat = Coat_Type.objects.get(id = post['coat_type'])
 
         this_dog = Dog.objects.create(name = post['pet_name'], weight = post['weight'], coat = coat, notes=post['notes'], owner=this_owner)
         this_dog.save()
 
-        new_quote = Quote.objects.create(price_book = this_price_book, service = bath_service, dog = this_dog, owner=this_owner)
+        new_quote = Quote.objects.create(price_book = this_price_book, service = service, dog = this_dog, owner=this_owner)
         new_quote.setExtras(post['overdue'],post['special'], post['profuse'], post['dematting'])
         new_quote.save()
         this_estimate.quotes.add(new_quote)

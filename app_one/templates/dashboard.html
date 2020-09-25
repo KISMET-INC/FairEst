@@ -24,11 +24,12 @@
         <div id="TOP_long">
             <nav>
                 <div class="nav_left">
-                    <h2 class = 'h2_nav'> FAIR<i class="fa fa-handshake-o nav"></i>EST</h2>
-                    <a href='/' class = 'h2_nav'> Home</p>
+                    <h2 class = 'nav_logo'> FAIR<i class="fa fa-handshake-o nav"></i>EST</h2>
+                    <a class = 'nav_right h2_nav' href = '/dashboard'>Dashboard</a>
+                    <a href='/' class = 'h2_nav'> Home</a>
                 </div>
                 <div class="nav_right">
-                    <a class = 'nav_right h2_nav' href = '/signin'>Sign out</a>
+                    <!-- <a class = 'nav_right h2_nav' href = '/signin'>Sign in</a> -->
                 </div>
             </nav>
         </div>
@@ -47,9 +48,9 @@
                             <div>
                             <input class="form_row" type="radio" id="last" name="search_by" value="last" checked>
                             <label class="form_row"  for="last"  >Owner Last</label><br>
-                            <input class="form_row" type="radio" id="dog" name="search_by" value="dog.name" >
+                            <!-- <input class="form_row" type="radio" id="dog" name="search_by" value="dog.name" >
                             <label class="form_row"  for="dog"  >Dog Name</label><br>
-                            
+                             -->
                             <!-- <input class = 'form_group_input radio' type="radio" id="created_at" name="search_by" value="created_at">
                             <label class = 'form_group_label radio' for="created_at">Created</label> -->
                             </div>
@@ -75,8 +76,11 @@
 
 
             <div id="right_main">
+
+
                 <h2 class = 'logo'>FAIR<i class="fa fa-handshake-o nav"></i>EST</h2>
-                <div id="owner_info"></div>
+                <div id="api">Api available from https://random.dog/doggos/ </div>
+                
                 <div id="selection_box"></div>
                 <div class = 'work'>
                 <h2> Estimates:</h2>
@@ -205,6 +209,8 @@
         $(document).ready(function(){  
             // JSON OBJECT
             $('button.back_to_work').hide()
+            $('#api').hide()
+         
 
 
             $('button.random_dog').click(function(){
@@ -219,11 +225,14 @@
                     }
                     
                     $('#selection_box').append("<img class = 'selection_box' src='https://random.dog/" + res[num] + "'>");
-
+                    $('#api').show()
+                   
                 }, "json");
 
                 $('button.back_to_work').show();
                 $('button.back_to_work').click(function(){
+                    $('#api').hide()
+                   
                     $('#selection_box').children().remove();
                     $('.work').slideDown('fast');
                     $('button.back_to_work').hide();

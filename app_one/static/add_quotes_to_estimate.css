@@ -38,6 +38,10 @@ table.clear tr:nth-child(even){
     background-color: transparent;
 
 }
+table.clear tr:nth-child(odd){
+    background-color: transparent;
+
+}
 
 #left_main {
    
@@ -59,7 +63,7 @@ table.clear tr:nth-child(even){
 h2.logo {
     font-size:50px
 }
-input.form_input{
+input.form_input {
     width: 60%;
 }
 label.form_label {
@@ -69,6 +73,9 @@ label.form_label {
     margin: 10px 0px;
 }
 
+.top_new {
+    margin-left: 80px;
+}
 select.form_select {
     display: inline-block;
     width: 20%;
@@ -114,9 +121,6 @@ table {
     margin: 0px;
 }
 
-.owner {
-  
-}
 
 img.icon {
     height:600px;
@@ -130,7 +134,7 @@ img.icon {
 img.icon2 {
     height:500px;
     position: absolute;
-    margin-left: 300px;
+    margin-left: 400px;
     margin-top: 100px;
 }
 img.icon3 {
@@ -141,6 +145,16 @@ img.icon3 {
     margin-top: 10px;
     opacity: .4;
 }
+
+img.icon4 {
+    height:500px;
+    z-index: -1;
+    position: absolute;
+    margin-left: -200px;
+    margin-top: 10px;
+    opacity: .4;
+}
+
 
 .edit_quote {
 
@@ -162,4 +176,8 @@ img.icon3 {
     background:white;
     padding: 20px;
     background:rgba(0, 255, 0, 0.1)
+}
+
+.add_owner{
+    margin:30px 0px;
 }

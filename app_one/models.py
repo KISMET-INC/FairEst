@@ -145,8 +145,9 @@ class DogManager(models.Manager):
         post = postData
         # empty error dictionary
         errors = {}
-
-        if post['button_press'] == 1:
+        print(post['button_press'])
+        if post['button_press'] == '1':
+            print('yes button press..')
             if len(post['pet_name']) < 2:
                 errors['pet_name'] = 'Pet name must be at least 2 characters'
 
@@ -312,7 +313,7 @@ class Quote(models.Model):
 
 
     def setTotal(self):
-        if self.on_schedule == True:
+        if self.on_schedule == False:
             self.schedule_price = self.price_book.off_schedule
         else:
             self.schedule_price = 0
