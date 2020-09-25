@@ -1,0 +1,10 @@
+
+coat_types = [
+{'name' : 'Clippable','desc' : 'Catch all for any breed whos hair must be clipped or scissored because it continues to grow in lengh. Like human hair','examples': 'Yorkshire, Cocker, Lhasa, ShihTzu, Terriers '},
+{'name' : 'Doodle','desc' : 'An unusual category for labradoodles and standard poodles and any dog 30lbs and above whos body is tall but low in mass and the coat is traditionally kept long.','examples': 'Standard Poodle, Labradoodle, Wheaten Terriers, Afghans '},
+{'name' : 'Slick','desc' : 'Very short, slick, so short that hairs cannot be lifted away from body with your hands','examples': 'Doberman, American Pit Bull Terrier, Chihuahua'},
+{'name' : 'Short','desc' : 'Medium length. Sheds single thick rigid strands. Hair car be lifted away from body to expose the skin.','examples': 'Labrador, Rottweiler, Beagle'},
+{'name' : 'Medium','desc' : 'Relatively thin. Long hairs usually grow on the fringes of the dog. Has a mild shedding undercoat but never gets very dense','examples': 'Working' border collies  '},
+{'name' : 'Double','desc' : 'Dense undercoat, Medium length. Sheds dense clumps of fur.','examples': 'Siberian Husky, Klekai, Welsh Corgi'},
+{'name' : 'Long Double','desc' : 'Dense undercoat, long flowing overcoat. Hairs over 3 inches long or longer','examples': 'Chow, Pomeranian, Samoyed, Australian Shepherd '}
+]

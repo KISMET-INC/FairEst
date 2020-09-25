@@ -1,0 +1,41 @@
+ <table>
+                    <tr>
+                    <th class= "id">Quote Id</th>
+                    <th class = 'name'>Name</th>
+                    <th class = 'weight'>Weight</th>
+                    <th class = 'coat'> Coat</th>
+                    <th class = 'coat'> Service </th>
+                    <th class = 'created'> Created</th>
+                    <th class = 'total'> Total</th>
+                    <th class = 'actions'> Actions</th>
+
+                    </tr>
+                    <tr>
+                        <td>1234</td>
+                        <td><a href =''>Bruno</a></td>
+                        <td>35lbs</td>
+                        <td>Doodle</td>
+                        <td>Bath</td>
+                        <td>July 19, 2020</td>
+                        <td>$75.00</td>
+                        <td>
+                            <a href =''>Edit</a> |
+                            <a href =''>Remove</a> |
+                            <a href =''>Add to Estimate</a>
+                        </td>
+                        </tr>
+                    <tr>
+                        <td>1235</td>
+                        <td><a href =''>Spike</a></td>
+                        <td>75</td>
+                        <td>Slick</td>
+                        <td>Bath</td>
+                        <td>July 19, 2020</td>
+                        <td>$55.00</td>
+                        <td>
+                            <a href =''>Edit</a> |
+                            <a href =''>Remove</a> |
+                            <a href =''>Add to Estimate</a>
+                        </td>
+                    </tr>
+                    </table>

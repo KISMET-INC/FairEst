@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHANGE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'global.css' %}">
+    <link rel="stylesheet" href="{% static 'add_anonymous_estimate.css' %}">
+</head>
+<body>
+
+    
+    <div id="CANVAS_long">
+        <div id="TOP_long">
+            <nav>
+                <div class="nav_left">
+                    <h2 class = 'h2_nav'> FAIR<i class="fa fa-handshake-o nav"></i>EST</h2>
+                    <a class = 'nav_right h2_nav' href = '/dashboard'>Dashboard</a>
+                    <!-- <a href='/dashboard' class = 'h2_nav'> Home</p> -->
+                </div>
+                <div class="nav_right">
+                    <a class = 'nav_right h2_nav' href = '/signout'>Sign Out</a>
+                </div>
+            </nav>
+        </div>
+
+
+
+        <div id="interface_block_two">
+            <div id="left_main">                
+                <form action="/process_add_first_estimate" method="post">
+                    <h3>Create Estimate:</h3>
+                    {% if messages %}
+                    <ul class="messages">    
+                    {% for message in messages %}    
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                    {% endfor %}
+                    </ul>
+                    {% endif %}
+                        
+
+                    <h2></h2>
+                    <h2>Add New Owner </h2>
+                    {% csrf_token %}
+                    <div class="form_row"><label class ='form_label' for = 'first'>First Name </label> 
+                        <input class='form_input' name = 'first' type = 'text'>
+                    </div>
+
+                    <div class="form_row"><label class ='form_label' for = 'last'>Last Name </label> 
+                        <input class='form_input' name = 'last' type = 'text'>
+                    </div>
+
+                    <div class="form_row"><label class ='form_label' for = 'email'>Email </label> 
+                        <input class='form_input' name = 'email' type = 'text'>
+                    </div>
+
+                    <div class="form_row"><label class ='form_label' for = 'phone'>Phone </label> 
+                        <input class='form_input' name = 'phone' type = 'text'>
+                    </div>
+
+                    <div class="form_row"><label class ='form_label' for = 'notes'>Notes </label> 
+                        <textarea class='form_textarea'  name = 'notes'></textarea>
+                    </div>
+                                    
+                    <h2>Add First Dog </h2>
+                    <div class="form_row"><label class ='form_label' for = 'pet_name'> Pet </label> 
+                        <input class='form_input' name = 'pet_name' type = 'text'>
+                    </div>
+                    <div class="form_row"><label class ='form_label' for = 'weight'> Weight (lbs) </label> 
+                        <input class='form_input' name = 'weight' type = 'number'> 
+                    </div>
+
+
+                    <label class ='form_label' for = 'form_select'>Coat Type </label>
+                    <select class = 'form_select' name = 'coat_type'>
+                        {%for coat in coats %}
+                        <option value = {{coat.id}}>{{coat.name}}</option>
+                        {% endfor %}
+                    </select>
+
+                    <div class="age_group">
+                    <div class="form_row ages">
+                        <label class ='form_label' for = 'years'>Age in years</label> 
+                        <input class='form_input' name = 'years' type = 'number'>
+                        <label class ='form_label' for = 'months'>Age in months</label> 
+                        <input class='form_input' name = 'months' type = 'number'>
+                    </div>
+                </div>
+
+                    <div class="form_row"><label class ='form_label' for = 'notes'>Notes </label> 
+                        <textarea class='form_textarea'  name = 'notes'></textarea>
+                    </div>
+
+                    <h3> Additional Services: </h3>
+                    <label class ='form_label' for = 'form_select'>Service </label>
+                    <select class = 'form_select' name = 'service'>
+                        {% for service in services %}
+                        {% if dog.service.name == service.name %}
+                        <option value = '{{service.name}}' selected>{{service.name}}</option>
+                        {% else %}
+                        <option value = '{{service.name}}' >{{service.name}}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+    
+                    <div class="form_row"><label class ='form_label' for = 'overdue'>overdue </label> <input value= "{{quote.overdue}}"class='form_input' name = 'overdue' type = 'number'></div>
+                    <div class="form_row"><label class ='form_label' for = 'special'>special_handling </label> <input value= "{{quote.special}}"class='form_input' name = 'special' type = 'number'></div>
+                    <div class="form_row"><label class ='form_label' for = 'profuse'>profuse_coat </label> <input value= "{{quote.profuse}}"class='form_input' name = 'profuse' type = 'number'></div>
+                    <div class="form_row"><label class ='form_label' for = 'dematting'>dematting </label> <input value= "{{quote.dematting}}"class='form_input' name = 'dematting' type = 'number'></div>
+        
+
+                    <div class="form_row_button"><button class ='form_button' type ='submit' name = 'bath_quote' value='1'> Add Quote</button></div>
+                </form>
+
+
+            </div>         <!-- END LEFT_MAIN -->
+                
+            
+            <div id="right_main">
+                {% for coat in coats %}
+                <div class="coat">
+                    <img width = 120px src = '/static/images/{{coat.name}}.jpg'>
+                    <div class="coat_desc">
+                    <h2>{{coat.name}}</h2>
+                    <p>{{coat.desc}}</p>
+                    <p>{{coat.examples}}</p>
+                    </div>
+                </div>
+                {% endfor %} 
+            </div>    <!-- END RIGHT_MAIN -->  
+                
+        </div> <!-- END INTERFACE -->
+
+
+    </div>  <!-- END CANVAS -->
+    
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Owner Info</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'global.css' %}">
+    <link rel="stylesheet" href="{% static 'add_quotes_to_estimate.css' %}">
+</head>
+<body>
+
+    <div id="CANVAS_long">
+        <div id="TOP_long">
+            <nav>
+                <div class="nav_left">
+                    <h2 class = 'h2_nav'> FAIR<i class="fa fa-handshake-o nav"></i>EST</h2>
+                    <a class = 'nav_right h2_nav' href = '/dashboard'>Dashboard</a>
+                    <!-- <a href='/dashboard' class = 'h2_nav'> Home</p> -->
+                </div>
+                <div class="nav_right">
+                    <a class = 'nav_right h2_nav' href = '/signin'>Sign in</a>
+                </div>
+            </nav>
+        </div>
+
+
+
+        <div id="interface_block_two">
+            <div id="left_main">   
+                <form action="/process_edit_owner/{{owner.id}}/{{redirect_key}}/{{quote_id}}/{{estimate_id}}" method="post">
+                    <div class="top">
+                        <h2 class = 'logo'> FAIR<i class="fa fa-handshake-o nav"></i>EST</h2>
+                        <h2>Edit Owner:</h2>
+                    </div>
+                    {% csrf_token %}
+                    <div class="form_row"><label class ='form_label' for = 'first'>First Name </label> 
+                        <input class='form_input' name = 'first' type = 'text' value = '{{owner.first}}'>
+                    </div>
+
+                    <div class="form_row"><label class ='form_label' for = 'last'>Last Name </label> 
+                        <input class='form_input' name = 'last' type = 'text' value = '{{owner.last}}'>
+                    </div>
+
+                    <div class="form_row"><label class ='form_label' for = 'email'>Email </label> 
+                        <input class='form_input' name = 'email' type = 'text' value = '{{owner.email}}'>
+                    </div>
+
+                    <div class="form_row"><label class ='form_label' for = 'phone'>Phone </label> 
+                        <input class='form_input' name = 'phone' type = 'text' value = '{{owner.phone}}'>
+                    </div>
+
+                    <div class="form_row"><label class ='form_label' for = 'notes'>Notes </label> 
+                        <textarea class='form_textarea'  name = 'notes'>{{owner.notes}}</textarea>
+                    </div>
+                    <div class="form_row_button"><button class ='form_button' type ='submit'> Update Owner</button></div>
+
+                </form>
+
+
+            </div>         <!-- END LEFT_MAIN -->
+                
+            
+            <div id="right_main"> 
+                <div class="owner">
+                    <div class="o_left">
+                    </div>
+                    <div class="o_right">
+                        <h2>{{owner.first}} {{owner.last}}</h2>
+                        <p>{{owner.email}}</p> 
+                        <p>{{owner.phone}}</p> 
+                        <p>{{owner.notes}}</p> 
+                <a href = '/process_delete_owner/{{owner.id}}'>Delete Owner</a>
+                    </div>
+                </div>
+
+                <div class="dog_list">
+                <h3>Dogs: {{owner.dogs.all.count}}</h3>
+                {% for dog in owner.dogs.all %}
+                <span>{{dog.name}} | <a href ='/process_remove_dog/{{dog.id}}/{{redirect_key}}/{{quote_id}}/{{estimate_id}}'>Delete </a> </span>
+                {% endfor %}
+                </div>
+
+                <img class = 'icon3' src = '/static/images/backdog.gif' >
+
+            </div>    <!-- END RIGHT_MAIN -->  
+                
+        </div> <!-- END INTERFACE -->
+
+
+    </div>  <!-- END CANVAS -->
+    
+</body>
+</html>

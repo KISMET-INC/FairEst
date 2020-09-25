@@ -1,0 +1,45 @@
+
+.jumbotron {
+    margin-top: 0px;
+    background-image: url('images/fairest1.jpg');
+    background-size:cover;
+    
+}
+
+.light {
+    width:550px;
+    padding: 50px;
+    height: 350px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.display-4 {
+    font-size: 60px;
+    font-family: var(--logo);
+}
+
+p.title {
+    margin: 10px 0px;
+    color:#9D344B;
+    font-size: 17px;
+    font-family: var(--logo);
+}
+
+
+#interface_block_one {
+    height:600px;
+}
+
+p.lead{
+    font-size: 13px;
+
+}
+
+i.brand {
+    color:#637A14
+}
+
+a.btn {
+    margin-top: 20px;
+}

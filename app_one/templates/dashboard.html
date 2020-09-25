@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'global.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard.css' %}">
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <div id="CANVAS_long">
+
+        <div id="TOP_long">
+            <nav>
+                <div class="nav_left">
+                    <h2 class = 'h2_nav'> FAIR<i class="fa fa-handshake-o nav"></i>EST</h2>
+                    <a href='/' class = 'h2_nav'> Home</p>
+                </div>
+                <div class="nav_right">
+                    <a class = 'nav_right h2_nav' href = '/signin'>Sign out</a>
+                </div>
+            </nav>
+        </div>
+
+
+        <div id="interface_block_two">
+
+
+            <div id="left_main">
+            <div class="work">
+                <div class="form_row search">
+                    <form action = '/search' method = 'post'>
+                        {% csrf_token %}
+                        <div class="form_row">
+                            <h2>Search by: </h2>
+                            <div>
+                            <input class="form_row" type="radio" id="last" name="search_by" value="last" checked>
+                            <label class="form_row"  for="last"  >Owner Last</label><br>
+                            <input class="form_row" type="radio" id="dog" name="search_by" value="dog.name" >
+                            <label class="form_row"  for="dog"  >Dog Name</label><br>
+                            
+                            <!-- <input class = 'form_group_input radio' type="radio" id="created_at" name="search_by" value="created_at">
+                            <label class = 'form_group_label radio' for="created_at">Created</label> -->
+                            </div>
+                        </div>
+
+
+                    <label class ='form_label' for = 'search'><b>Search Existing Owner:</b> </label> 
+                    <input class="form_row search_input" name = 'search' type = 'text'>
+                    <button> Search </button>
+                    </form>
+                </div>
+
+                <a class = "owner_est" href='/add_first_estimate'><button class="form_row top" > New Owner and Estimate </button></a> 
+            </div>
+            <div class = 'buttons'>
+                    <button class = 'random_dog' >GET RANDOM DOG</button>
+                    <button class = 'back_to_work' >GET BACK TO WORK!</button>
+                </div>
+
+                <img class = 'bigguy' src ='/static/images/bigguy.gif'>
+                
+            </div>    <!-- END left_MAIN --> 
+
+
+            <div id="right_main">
+                <h2 class = 'logo'>FAIR<i class="fa fa-handshake-o nav"></i>EST</h2>
+                <div id="owner_info"></div>
+                <div id="selection_box"></div>
+                <div class = 'work'>
+                <h2> Estimates:</h2>
+                <div class="table">
+                <table>
+                    <tr>
+                        <th class= "owner"> Owner</th>
+                        <th class= "date_created">Created</th>
+                        <th class= "total">Total</th>
+                        <th class= "num_dogs">#</th>
+                        <th class= "dogs_included">Dogs</th>
+                        <th class = 'actions'>actions</th>
+                    </tr>
+
+
+                    {% if search != None %}
+                    {% for owner in search %}
+                    <tr>
+                        <td>
+                        <p>{{owner.last}}, {{owner.first}}</p><a class = 'edit_owner' href ='/edit_owner/{{owner.id}}/0/0/0'>Edit Owner</a>
+                        </td>
+                            {% if owner.estimates.all %}
+                        <td>{{owner.estimates.all.0.created_at|date:"n/d/y" }}</td>
+                        <td> 
+                            {% if owner.quotes.all %}
+                            $ {{owner.estimates.all.0.total}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if owner.quotes.all %}
+                            {{owner.estimates.all.0.total_dogs}}
+                            {% endif %}
+                            
+                        </td>
+                        <td>
+                            
+                            {% for quote in owner.estimates.all.0.quotes.all %}
+                            <span> <a class='in_page dogs' href = '/edit_quote/{{quote.id}}/0/0'>{{quote.dog.name}}</a> [{{quote.dog.coat.name}}] [{{quote.service.name}}] [${{quote.total}}]</span>
+                            {% endfor %}
+                            
+                        </td>
+                        
+                        <td>
+                            <a href ='/add_quotes_to_estimate/{{owner.estimates.all.0.id}}'>Edit Estimate </a>
+                            <a href ='/process_delete_estimate/{{owner.estimates.all.0.id}}'>Remove Estimate</a> 
+                        </td>
+                    </tr>
+
+
+                    {% else %}
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>NO ESTIMATE YET</td>
+                        <td>                
+                        <a href ='/process_add_first_estimate_to_owner/{{owner.id}}' >Start Estimate</a> 
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                    {% else %}
+                    {% for owner in owners %}
+
+
+                    <tr>
+                        <td>
+                        <p>{{owner.last}}, {{owner.first}}</p><a class = 'edit_owner' href ='/edit_owner/{{owner.id}}/0/0/0'>Edit Owner</a>
+                        </td>
+                            {% if owner.estimates.all %}
+                        <td>{{owner.estimates.all.0.created_at|date:"n/d/y" }}</td>
+                        <td> 
+                            {% if owner.quotes.all %}
+                            $ {{owner.estimates.all.0.total}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if owner.quotes.all %}
+                            {{owner.estimates.all.0.total_dogs}}
+                            {% endif %}
+                            
+                        </td>
+                        <td>
+                            
+                            {% for quote in owner.estimates.all.0.quotes.all %}
+                            <span> <a class='in_page dogs' href = '/edit_quote/{{quote.id}}/0/0'>{{quote.dog.name}}</a> [{{quote.dog.coat.name}}] [{{quote.service.name}}] [${{quote.total}}]</span>
+                            {% endfor %}
+                            
+                        </td>
+                        
+                        <td>
+                            <a href ='/add_quotes_to_estimate/{{owner.estimates.all.0.id}}'>Edit Estimate </a>
+                            <a href ='/process_delete_estimate/{{owner.estimates.all.0.id}}'>Remove Estimate</a> 
+                        </td>
+                    </tr>
+
+
+                    {% else %}
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>NO ESTIMATE YET</td>
+                        <td>                
+                        <a href ='/process_add_first_estimate_to_owner/{{owner.id}}' >Start Estimate</a>
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    </table>
+                    </div>
+                    {% if search != None %}
+                    <a href='/dashboard'>Clear Search</a>
+                    {% endif %}   
+                </div>                    
+
+            </div>         <!-- END right_MAIN -->
+                
+            
+            
+                
+        </div> <!-- END INTERFACE -->
+
+
+    </div>  <!-- END CANVAS -->
+    <script>
+        $(document).ready(function(){  
+            // JSON OBJECT
+            $('button.back_to_work').hide()
+
+
+            $('button.random_dog').click(function(){
+                $('.work').slideUp('fast');
+                $('#selection_box').children().remove();
+
+                $.get("https://random.dog/doggos", function(res) {
+                    var num = Math.floor((Math.random() * 1000) + 1)
+                    while (res[num].includes('.mp4')){
+                        console.log(res[num])
+                        var num = Math.floor((Math.random() * 99) + 1)
+                    }
+                    
+                    $('#selection_box').append("<img class = 'selection_box' src='https://random.dog/" + res[num] + "'>");
+
+                }, "json");
+
+                $('button.back_to_work').show();
+                $('button.back_to_work').click(function(){
+                    $('#selection_box').children().remove();
+                    $('.work').slideDown('fast');
+                    $('button.back_to_work').hide();
+                });
+            }); // end random dog button click
+
+        }); // END DOCUMENT READY
+    
+    </script>
+    
+</body>
+</html>

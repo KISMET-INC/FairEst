@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHANGE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'global.css' %}">
+    <link rel="stylesheet" href="{% static 'add_quotes_to_estimate.css' %}">
+</head>
+<body>
+
+    
+    <div id="CANVAS_long">
+        <div id="TOP_long">
+            <nav>
+                <div class="nav_left">
+                    <h2 class = 'h2_nav'> FAIR<i class="fa fa-handshake-o nav"></i>EST</h2>
+                    <a class = 'nav_right h2_nav' href = '/dashboard'>Dashboard</a>
+                    <!-- <a href='/dashboard' class = 'h2_nav'> Home</p> -->
+                </div>
+                <div class="nav_right">
+                    <a class = 'nav_right h2_nav' href = '/signout'>Sign Out</a>
+                </div>
+            </nav>
+        </div>
+
+
+
+        <div id="interface_block_two">
+            <div id="left_main_quote">  
+                
+                    
+                    <!-- <a href ='/add_quote_to_dog/{{quote.dog.id}}'>Add New Quote to {{quote.dog.name}}</a> -->                
+                    <h2 class = 'logo'> FAIR<i class="fa fa-handshake-o nav"></i>EST</h2>
+                <form action="/process_edit_quote/{{quote.id}}/{{redirect_key}}/{{estimate_id}}" method="post">
+
+                    <div class="edit_quote">  
+                        {% for quote in dog.quotes.all %}
+                        <h2>Edit Quote : {{quote.dog.name}} - ${{quote.total}}</h2>
+                        <!-- <a href ='/process_delete_quote/{{quote.id}}'>-  Delete this Quote</a> -->
+                        {% endfor %}      
+                    </div>
+                    <h3>Edit {{quote.dog.name}}:</h3>
+
+                    {% if messages %}
+                        <ul class="messages">
+                        {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                        </ul>
+                        {% endif %}
+
+                    {% csrf_token %}
+                    <div class="form_row"><label class ='form_label' for = 'pet_name'> Name </label> 
+                        <input class='form_input' name = 'pet_name' type = 'text' value='{{quote.dog.name}}'>
+                    </div>
+                    <div class="form_row"><label class ='form_label' for = 'weight' > Weight (lbs) </label> 
+                        <input class='form_input' name = 'weight' type = 'number' value='{{quote.dog.weight}}'> 
+                    </div>
+
+
+                    <label class ='form_label' for = 'form_select'>Coat Type </label>
+                    <select class = 'form_select' name = 'coat_type'>
+                        {% for coat in coats %}
+                        {% if dog.coat.name == coat.name %}
+                        <option value = '{{coat.id}}' selected>{{coat.name}}</option>
+                        {% else %}
+                        <option value = '{{coat.id}}'>{{coat.name}}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+
+                    
+                        <div class="form_row">
+                            <label class ='form_label' for = 'years'>Age in years</label> 
+                            <input class='form_input age' name = 'years' type = 'number'>
+                    
+                            <label class ='form_label' for = 'months'>Age in months</label> 
+                            <input class='form_input age' name = 'months' type = 'number'>
+                        </div>
+
+
+                    <div class="form_row"><label class ='form_label' for = 'notes'>Notes </label> 
+                        <textarea class='form_textarea'  name = 'notes'>{{quote.dog.notes}}</textarea>
+                    </div>
+                    <div class="form_row">
+                        <label class ='form_label' for = 'form_select'>Service </label>
+                        <select class = 'form_select' name = 'service'>
+                            {% for service in services %}
+                            {% if dog.service.name == service.name %}
+                            <option value = '{{service.name}}' selected>{{service.name}}</option>
+                            {% else %}
+                            <option value = '{{service.name}}' >{{service.name}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="add_ons">
+                        <h3> Additional Services: </h3>
+                        <div class="form_row">
+                            <label class ='form_label' for = 'overdue'>overdue </label> 
+                            <input value= "{{quote.overdue}}"class='form_input  age' name = 'overdue' type = 'number'>
+                            <label class ='form_label' for = 'special'>special_handling </label> 
+                            <input value= "{{quote.special}}"class='form_input age' name = 'special' type = 'number'>
+                        </div>
+                        <div class="form_row">
+                            <label class ='form_label' for = 'profuse'>profuse_coat </label> 
+                            <input value= "{{quote.profuse}}"class='form_input age' name = 'profuse' type = 'number'>
+                            <label class ='form_label' for = 'dematting'>dematting </label> 
+                            <input value= "{{quote.dematting}}"class='form_input age' name = 'dematting' type = 'number'>
+                        </div>
+                    </div>
+        
+                    <button class ='form_button' type ='submit' name = 'add_quote' value='1'> Update Quote</button>
+                </form>
+                
+            </div>         <!-- END LEFT_MAIN -->
+                
+            
+            <div id="right_main">
+                <div class="owner">
+                <div class="o_left"></div>
+                <div class="o_right">
+                    <h2>{{quote.owner.first}} {{quote.owner.last}}</h2>
+                    <p>{{quote.owner.email}}</p> 
+                    <p>{{quote.owner.phone}}</p> 
+                    <p>{{quote.owner.notes}}</p>
+                    <a href = '/edit_owner/{{quote.owner.id}}/{{redirect_key}}/{{quote.id}}/{{estimate_id}}'>Edit Owner</a>
+    
+                </div>
+                </div>
+
+                <div class="pets">
+                    <ul>
+                    <h3>Other Dogs:</h3>
+                    {% for dog in quote.owner.dogs.all %}
+                    {% if dog.quotes.all %}
+                    <li><a href='/edit_quote/{{dog.id}}/{{redirect_key}}/{{estimate_id}}'>{{dog.name}}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    </ul>
+                </div>
+
+           
+            <img class = 'icon2' src = '/static/images/couple.gif' >
+
+            <div class="coats">
+                {% for coat in coats %}
+                <div class="coat">
+                    <img class ='pic' src = '/static/images/{{coat.name}}.jpg'>
+                    <div class="coat_desc">
+                    <h2>{{coat.name}}</h2>
+                    <!-- <p>{{coat.desc}}</p>
+                    <p>{{coat.examples}}</p> -->
+                    </div>
+                </div>
+                {% endfor %} 
+            </div>
+
+            
+        </div>    <!-- END RIGHT_MAIN -->  
+                
+        </div> <!-- END INTERFACE -->
+
+
+    </div>  <!-- END CANVAS -->
+    
+</body>
+</html>

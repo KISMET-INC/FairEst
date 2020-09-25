@@ -1,0 +1,133 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+
+.form_row {
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-type: none;
+}
+p{
+    padding: 0px;
+    margin: 0px;
+}
+a {
+    display:block;
+}
+.search {
+    padding: 10px 30px 30px 30px;
+    border-radius: 10px;
+    background:rgba(255, 255, 255, 0.5)
+
+}
+
+.owner_est {
+    margin-top: 30px;
+}
+.buttons, .owner_est {
+    padding: 0px 0px 0px 30px;
+
+}
+.owner {
+    width: 170px;
+}
+.num_dogs {
+    width: 1px;
+}
+.search_input {
+    width: 200px;
+}
+.actions{
+    width:15px;
+}
+.total {
+    width: 70px;
+}
+
+#left_main {
+    display:flex;
+    width: 20%;
+    
+}
+
+#right_main {
+    display: flex;
+    align-items: center;
+    margin: 0px auto;
+    margin-top: 20px;
+    width: 70%;
+}
+
+a {
+    font-weight: bold;
+    text-decoration: underline;
+    color:purple;
+}
+
+button {
+    width: 200px;
+    margin: 0px;
+    background: #B4CB65;
+}
+
+th.actions {
+    width:200px;
+}
+
+th.dogs_included {
+    width: 400px;
+}
+
+table {
+    margin:0px;
+    
+}
+
+.table {
+    max-height: 300px;
+    border:3px solid black;
+    border-radius: 10px;
+    overflow: auto;
+}
+
+.selection_box {
+    padding: 5px;
+    margin:0px auto;
+    border: 5px solid green;
+    max-width:800px;
+    max-height: 400px;
+    border-radius:10px;
+}
+button.back_to_work {
+    background: #9D344B;
+    margin-top: 20px;
+}
+
+form {
+    padding: 0px;
+}
+
+
+.form_row {
+    margin-bottom: 10px;
+}
+
+.random_dog {
+    font-weight:bold;
+    background: #9177AC;
+}
+
+
+.dogs {
+    border: none;
+    display: inline-block;
+}
+
+.bigguy {
+    margin-top:20px;
+    width: 400px;
+}
+

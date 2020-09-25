@@ -1,0 +1,37 @@
+
+
+
+
+path('add_extras_to_quote/<int:quote_id>/<int:estimate_id>', views.add_extras_to_quote),
+
+#=============================================##
+# add_extras_to_quote()
+#=============================================##
+def add_extras_to_quote(request, quote_id, estimate_id):
+    post = request.POST
+    print(post)
+    
+    # if 'user_id' not in request.session:
+    #     return redirect('/')
+    # #-------------------#
+    context = {
+
+    }
+    return render(request,'add_extras_to_quote.html',context)
+
+
+#----------------------------------------------------#
+
+
+path('process_add_extras_to_quote/<int:quote_id>/<int:estimate_id>', views.process_add_extras_to_quote),
+
+#=============================================##
+# process_add_extras_to_quote()
+# return redirect('/')
+#=============================================##
+def process_add_extras_to_quote(request,quote_id, estimate_id):
+    post = request.POST
+
+
+    return redirect('/add_quote_to_dog')
+
