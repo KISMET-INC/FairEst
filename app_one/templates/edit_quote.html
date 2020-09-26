@@ -21,8 +21,8 @@
         <nav>
             <div class="nav_left">
                 <h2 class = 'nav_logo'> FAIR<i class="fa fa-handshake-o nav"></i>EST</h2>
-                <a class = 'nav_right h2_nav' href = '/dashboard'>Dashboard</a>
                 <a href='/dashboard' class = 'h2_nav'> Home</a>
+                <a class = 'nav_right h2_nav' href = '/dashboard'>Dashboard</a>
             </div>
             <div class="nav_right">
                 <!-- <a class = 'nav_right h2_nav' href = '/signin'>Sign in</a> -->
@@ -92,7 +92,7 @@
                         <label class ='form_label' for = 'form_select'>Service </label>
                         <select class = 'form_select' name = 'service'>
                             {% for service in services %}
-                            {% if dog.service.name == service.name %}
+                            {% if quote.service.name == service.name %}
                             <option value = '{{service.name}}' selected>{{service.name}}</option>
                             {% else %}
                             <option value = '{{service.name}}' >{{service.name}}</option>
@@ -105,7 +105,7 @@
                         <div class="form_row">
                             <label class ='form_label' for = 'overdue'>overdue </label> 
                             <input value= "{{quote.overdue}}"class='form_input  age' name = 'overdue' type = 'number'>
-                            <label class ='form_label' for = 'special'>special_handling </label> 
+                            <label class ='form_label' for = 'special'>special handling </label> 
                             <input value= "{{quote.special}}"class='form_input age' name = 'special' type = 'number'>
                         </div>
                         <div class="form_row">
@@ -124,27 +124,30 @@
             
             <div id="right_main">
                 <div class="owner">
-                <div class="o_left"></div>
-                <div class="o_right">
-                    <h2>{{quote.owner.first}} {{quote.owner.last}}</h2>
-                    <p>{{quote.owner.email}}</p> 
-                    <p>{{quote.owner.phone}}</p> 
-                    <p>{{quote.owner.notes}}</p>
-                    <a href = '/edit_owner/{{quote.owner.id}}/{{redirect_key}}/{{quote.id}}/{{estimate_id}}'>Edit Owner</a>
-    
+                    <div class="o_right">
+                        <h2>{{quote.owner.first}} {{quote.owner.last}}</h2>
+                        <p>{{quote.owner.email}}</p> 
+                        <p>{{quote.owner.phone}}</p> 
+                        <p>{{quote.owner.notes}}</p>
+                        <a href = '/edit_owner/{{quote.owner.id}}/{{redirect_key}}/{{quote.id}}/{{estimate_id}}'>Edit Owner</a>
+        
+                    </div>
+                <div class="o_left">
+                    <div class="pets">
+                        <ul>
+                        <h3>Other Dogs:</h3>
+                        {% for dog in quote.owner.dogs.all %}
+                        {% if dog.quotes.all %}
+                        <li><a href='/edit_quote/{{dog.id}}/{{redirect_key}}/{{estimate_id}}'>{{dog.name}}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        </ul>
+                    </div>
                 </div>
+                
                 </div>
 
-                <div class="pets">
-                    <ul>
-                    <h3>Other Dogs:</h3>
-                    {% for dog in quote.owner.dogs.all %}
-                    {% if dog.quotes.all %}
-                    <li><a href='/edit_quote/{{dog.id}}/{{redirect_key}}/{{estimate_id}}'>{{dog.name}}</a></li>
-                    {% endif %}
-                    {% endfor %}
-                    </ul>
-                </div>
+               
 
            
             <img class = 'icon2' src = '/static/images/couple.gif' >

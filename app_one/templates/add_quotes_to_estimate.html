@@ -23,8 +23,8 @@
             <nav>
                 <div class="nav_left">
                     <h2 class = 'nav_logo'> FAIR<i class="fa fa-handshake-o nav"></i>EST</h2>
-                    <a class = 'nav_right h2_nav' href = '/dashboard'>Dashboard</a>
                     <a href='/dashboard' class = 'h2_nav'> Home</a>
+                    <a class = 'nav_right h2_nav' href = '/dashboard'>Dashboard</a>
                 </div>
                 <div class="nav_right">
                     <!-- <a class = 'nav_right h2_nav' href = '/signin'>Sign in</a> -->
@@ -75,13 +75,14 @@
                         {% csrf_token %}
                     <p class = 'form_group_title'>Add previous quotes to new estimate: </p>
                     <div class="form_row_group check">
-                    
                         {% for quote in owner.quotes.all %}
                         {% if quote not in estimate.quotes.all %}
-                        <input class = 'form_group_input check' type="checkbox" id="{{quote.id}}" name="quote_id" value = '{{quote.id}}'>
-                        <label class = 'form_group_label check' for="{{quote.id}}"> {{quote.dog.name}} [{{quote.dog.coat.name}}] ${{quote.dog.quotes.all.0.total}}</label><br>
-                        {% endif %}
-                        {% endfor %}
+                             <div class="prev_dog">
+                                <input class = 'form_group_input check' type="checkbox" id="{{quote.id}}" name="quote_id" value = '{{quote.id}}'>
+                                <label class = 'form_group_label check' for="{{quote.id}}"> {{quote.dog.name}} [{{quote.dog.coat.name}}] ${{quote.dog.quotes.all.0.total}}</label><br>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
                     </div>
                     <div class="form_row_button"><button class ='form_button' type ='submit' name = 'button_press' value='0'> Add Previous Quotes</button></div>
                 </div>
@@ -100,8 +101,8 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <td>Service Price:</td>
-                            <td>${{quote.service_price}}</td>
+                            <td>Base Price:</td>
+                            <td>${{quote.price_book.base_price}}</td>
                         </tr>
                         <tr>
                             <td>Weight Price: </td>
@@ -230,9 +231,6 @@
 
                     <div class="form_row_button"><button class ='form_button' type ='submit' name = 'button_press' value='1'> Add Quote</button></div>
                 </form>
-
-               
-
 
 
             </div>         <!-- END LEFT_MAIN -->

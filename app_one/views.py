@@ -179,7 +179,7 @@ def dashboard(request):
     
 
     context = {
-        'owners' : Owner.objects.all(),
+        'owners' : Owner.objects.all().order_by("-updated_at"),
         'search' : None
         
         
@@ -212,18 +212,6 @@ def search(request):
 
 #-----------------OWNER-----------------------#
 
-#=============================================##
-# add_owner()
-#=============================================##
-def add_owner(request):
-    post = request.POST
-    print(post)
-    
-    # if 'user_id' not in request.session:
-    #     return redirect('/')
-
-    return render(request,'add_owner.html')
-
 
 #=============================================##
 # edit_owner()
@@ -247,48 +235,10 @@ def edit_owner(request, owner_id,redirect_key, quote_id, estimate_id):
 
     return render(request,'edit_owner.html',context)
 
-#=============================================##
-# show_owner_info()
-#=============================================##
-def show_owner_info(request, owner_id):
-    post = request.POST
-    print(post)
-    
-    # if 'user_id' not in request.session:
-    #     return redirect('/')
-    # #-------------------#
-    owner = Owner.objects.get(id = owner_id)
-
-    context = {
-        'owner':  Owner.objects.get(id = owner_id),
-        'coats': Coat_Type.objects.all()
-
-    }
-    return render(request,'show_owner_info.html',context)
-
 
 
 
 #-------------------DOGS-----------------------#
-
-#=============================================##
-# add_a_dog_to_owner()
-#=============================================##
-def add_dog_to_owner(request, owner_id):
-    post = request.POST
-    print(post)
-    
-    # if 'user_id' not in request.session:
-    #     return redirect('/')
-    # #-------------------#
-
-    
-    context = {
-        'coats' : Coat_Type.objects.all(),
-        'owner':  Owner.objects.get(id = owner_id),
-    }
-
-    return render(request,'add_dog_to_owner.html', context)
 
 #=============================================##
 # edit_dog()
@@ -309,21 +259,6 @@ def edit_dog(request, dog_id):
     return render(request,'edit_dog.html',context)
 
 
-#=============================================##
-# show_dog_info()
-#=============================================##
-def show_dog_info(request, dog_id):
-    post = request.POST
-    print(post)
-    
-    # if 'user_id' not in request.session:
-    #     return redirect('/')
-    # #-------------------#
-    context = {
-        'dog' : Dog.objects.get(id=dog_id)
-
-    }
-    return render(request,'show_dog_info.html',context)
 
 
 #-------------------ESTIMATES-----------------------#
@@ -368,19 +303,7 @@ def add_first_estimate(request):
     }
     return render(request,'add_first_estimate.html',context)
 
-#=============================================##
-# add_first_estimate_to_owner()
-#=============================================##
-def add_first_estimate_to_owner(request, owner_id):
-    post = request.POST
-    print(post)
-    this_owner = Owner.objects.get(id=owner_id)
-    estimate = Estimate.objects.create(this_owner)
-    # if 'user_id' not in request.session:
-    #     return redirect('/')
-    # #-------------------#
-    
-    return render(request,'add_first_estimate_to_owner.html',context)
+
 
 #-------------------QUOTES-----------------------#
 
@@ -406,46 +329,6 @@ def edit_quote(request, quote_id, redirect_key, estimate_id):
     }
     return render(request,'edit_quote.html',context)
 
-#=============================================##
-# add_quote_to_dog()
-#=============================================##
-def add_quote_to_dog(request, dog_id):
-    post = request.POST
-    print(post)
-    
-    # if 'user_id' not in request.session:
-    #     return redirect('/')
-    # #-------------------#
-    dog = Dog.objects.get(id = dog_id)
-    context = {
-        'coats' : Coat_Type.objects.all,
-        'dog' : dog,
-    }
-    return render(request,'add_quote_to_dog.html',context)
-
-
-#-------------------EXTRAS-----------------------#
-#=============================================##
-# add_extras_to_quote()
-#=============================================##
-def add_extras_to_quote(request, quote_id, estimate_id):
-    post = request.POST
-    print(post)
-    
-    # if 'user_id' not in request.session:
-    #     return redirect('/')
-    # #-------------------#
-    quote = Quote.objects.get(id = quote_id)
-    context = {
-        'coats' : Coat_Type.objects.all(),
-        'owner' : Owner.objects.get(id=quote.owner.id),
-        'quote' : quote
-    }
-    if estimate_id != 0:
-        context['estimate'] = Estimate.objects.get(id=estimate_id)
-
-    return render(request,'add_extras_to_quote.html',context)
-
 
 
 
@@ -462,10 +345,10 @@ def init_db_objects(request):
     post = request.POST
     print(post)
 
-    if len(Owner.objects.all()) == 0:
-        return redirect('/add_first_estimate')
+    # if len(Owner.objects.all()) == 0:
+    return redirect('/add_first_estimate')
 
-    return redirect('/dashboard')
+    # return redirect('/dashboard')
 
 
 #=============================================##
@@ -609,8 +492,6 @@ def process_edit_dog(request, dog_id):
 
     return redirect(f'/show_owner_info/{this_dog.owner.id}')
 
-    #-------------------ESTIMATE-----------------------#
-
 
 #-------------------ESTIMATES-----------------------#
 #=============================================##
@@ -627,21 +508,18 @@ def process_add_first_estimate(request):
             messages.error(request,value, extra_tags='reg')
         return redirect('/add_first_estimate')
 
-    this_owner = Owner.objects.create(first=post['first'], last = post['last'], email = post['email'], notes =post['notes'])
+    this_owner = Owner.objects.create(first=post['first'], last = post['last'], email = post['email'], notes =post['owner_notes'])
     this_estimate = Estimate.objects.create(owner = this_owner)
 
     this_price_book = Price_Book.objects.get(id=1)
     service = Service.objects.get(name = post['service'])
     coat = Coat_Type.objects.get(id = post['coat_type'])
 
-    this_dog = Dog.objects.create(name = post['pet_name'], weight = post['weight'], coat = coat, notes=post['notes'], owner=this_owner)
+    this_dog = Dog.objects.create(name = post['pet_name'], weight = post['weight'], coat = coat, notes=post['pet_notes'], owner=this_owner)
 
     new_quote = Quote.objects.create(price_book = this_price_book, service = service, dog = this_dog, owner=this_owner)
     new_quote.setExtras(post['overdue'],post['special'], post['profuse'], post['dematting'])
-
-    # new_quote.calc_weight_price()
-    # new_quote.calc_coat_price()
-    # new_quote.save()
+    new_quote.save()
 
     this_estimate.quotes.add(new_quote)
 
@@ -658,26 +536,7 @@ def process_delete_estimate(request, estimate_id):
 
     return redirect('/dashboard')
 
-#=============================================##
-# process_add_estimate_to_owner()
-# return redirect('/')
-#=============================================##
-def process_add_estimate_to_owner(request, owner_id):
-    post = request.POST
-    print(post)
 
-    this_owner = Owner.objects.get(id = owner_id)
-    new_estimate = Estimate.objects.create(start_price = request.session['start_price'], owner = this_owner)
-    if post['weight'] !='':
-        process_add_quote_to_estimate(request, new_estimate.id)
-
-    
-    for i in request.POST.getlist('dog_id'):
-        quote = Quote.objects.get(id=i)
-        new_estimate.quotes.add(quote)
-
-
-    return redirect(f'/show_owner_info/{owner_id}')
 
 #=============================================##
 # /process_add_first_estimate_to_owner()
@@ -689,11 +548,6 @@ def process_add_first_estimate_to_owner(request,owner_id):
     this_estimate = Estimate.objects.create(owner = this_owner)
     
     return redirect(f'/add_quotes_to_estimate/{this_estimate.id}')
-
-
-
-
-
 
 
 
@@ -741,32 +595,4 @@ def process_edit_quote(request,quote_id, redirect_key, estimate_id):
     else:
         return redirect(f'/add_quotes_to_estimate/{estimate_id}')
 
-#=============================================##
-# process_add_quote_to_dog()
-# return redirect('/')
-#=============================================##
-def process_add_quote_to_dog(request,dog_id):
-    post = request.POST
 
-
-    return redirect('/add_quote_to_dog')
-
-#-------------------EXTRAS-----------------------#
-#=============================================##
-# process_add_extras_to_quote()
-# return redirect('/')
-#=============================================##
-def process_add_extras_to_quote(request,quote_id, estimate_id):
-    post = request.POST
-    print(post)
-    
-    service = Service.objects.get(name = post['service'])
-    this_quote = Quote.objects.get(id = quote_id)
-    this_quote.service = service
-    this_quote.setExtras(post['overdue'], post['special'], post['profuse'], post['dematting'])
-    this_quote.save()
-
-
-
-
-    return redirect(f'/add_quotes_to_estimate/{estimate_id}')

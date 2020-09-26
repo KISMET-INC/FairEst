@@ -280,7 +280,7 @@ class Quote(models.Model):
         self.service_price = 0
 
         coat_haircut = {
-                'Slick' : 0,
+                'Slick' : 10,
                 'Short' : 20,
                 'Medium' : 10,
                 'Clippable' : 15,
@@ -292,19 +292,19 @@ class Quote(models.Model):
         if self.service.name == 'Short Haircut':
             for key,value in coat_haircut.items():
                 if self.dog.coat.name == key:
-                    self.service_price = value
+                    self.service_price += value
         
         elif self.service.name == 'Long Haircut':
             for key,value in coat_haircut.items():
                 if self.dog.coat.name == key:
-                    self.service_price = value + 5
+                    self.service_price += value + 5
                     
         elif self.service.name == 'Bath' and self.dog.coat.name =='Doodle':
-            self.service_price = 10
+            self.service_price += 10
         
         else:
             
-            self.service_price == 0
+            self.service_price = 0
 
 
         return self.service_price
@@ -317,7 +317,8 @@ class Quote(models.Model):
             self.schedule_price = self.price_book.off_schedule
         else:
             self.schedule_price = 0
-        self.total =  self.weight_price + self.coat_price  + self.overdue + self.schedule_price + self.overdue +self.special + self.profuse + self.dematting + self.service_price
+            print(f'weight {self.weight_price} coat {self.coat_price}, service {self.service_price}')
+        self.total = self.price_book.base_price + self.weight_price + self.coat_price  + self.overdue + self.schedule_price + self.overdue +self.special + self.profuse + self.dematting 
         return self
     
 
@@ -354,7 +355,7 @@ class Quote(models.Model):
 
         for key,value in coat_dict.items():
             if self.dog.coat.name == key:
-                self.coat_price = value + self.price_book.base_price
+                self.coat_price = self.service_price + value
 
         return self.coat_price
 

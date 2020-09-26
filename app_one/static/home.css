@@ -1,25 +1,29 @@
 
 .jumbotron {
-    margin-top: 0px;
+    margin-top: 70px;
+    border-radius:20px;
     background-image: url('images/fairest1.jpg');
     background-size:cover;
     
 }
 
 .light {
-    width:550px;
-    padding: 50px;
-    height: 400px;
-    border-radius: 10px;
+    width:580px;
+    padding: 50px 50px 50px 80px;
+    height: 455px;
+    margin-left: 90px;
+    border-radius: 15px;
     background-color: rgba(255, 255, 255, 0.5);
 }
 
 .display-4 {
     font-size: 60px;
     font-family: var(--logo);
+    margin-bottom: 30px;
 }
 
 p.title {
+    width:80%;
     margin: 10px 0px;
     color:#637A14;
     font-size: 20px;
@@ -32,7 +36,8 @@ p.title {
 }
 
 p.lead{
-    font-size: 13px;
+    width:95%;
+    font-size: 15px;
 
 }
 
@@ -45,6 +50,5 @@ a.btn {
 }
 
 .buttons {
-    justify-content: space-around;
-    display:flex;
+    
 }

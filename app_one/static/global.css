@@ -6,6 +6,14 @@
 body {
     background-image: url('images/stripes2.jpg');
 }
+html {
+    overflow:   scroll;
+  }
+  ::-webkit-scrollbar {
+      width: 0px;
+      background: transparent; /* make scrollbar transparent */
+  }
+
 *{
     font-weight: bold;
     font-family:var(--p);
@@ -225,7 +233,10 @@ input.form_group_input.radio {
 /*CHECK*/
 
 .form_row_group.check {
+    width:100%;
+    flex-wrap: wrap;
     display:flex;
+    justify-content: start;
 }
 
 label.form_group_label.check {

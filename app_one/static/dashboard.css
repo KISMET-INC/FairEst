@@ -130,8 +130,10 @@ form {
 }
 
 .bigguy {
-    margin-left: -70px;
-    margin-top:30px;
-    width: 400px;
+    margin-left:-150px;
+    margin-top: 20px;
+    z-index: -1;
+    position: relative;
+    width:500px;
 }
 

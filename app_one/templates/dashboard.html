@@ -25,8 +25,8 @@
             <nav>
                 <div class="nav_left">
                     <h2 class = 'nav_logo'> FAIR<i class="fa fa-handshake-o nav"></i>EST</h2>
-                    <a class = 'nav_right h2_nav' href = '/dashboard'>Dashboard</a>
                     <a href='/' class = 'h2_nav'> Home</a>
+                    <a class = 'nav_right h2_nav' href = '/dashboard'>Dashboard</a>
                 </div>
                 <div class="nav_right">
                     <!-- <a class = 'nav_right h2_nav' href = '/signin'>Sign in</a> -->
@@ -90,7 +90,7 @@
                         <th class= "owner"> Owner</th>
                         <th class= "date_created">Created</th>
                         <th class= "total">Total</th>
-                        <th class= "num_dogs">#</th>
+                        <th class= "num_dogs">dogs owned</th>
                         <th class= "dogs_included">Dogs</th>
                         <th class = 'actions'>actions</th>
                     </tr>
@@ -111,14 +111,14 @@
                         </td>
                         <td>
                             {% if owner.quotes.all %}
-                            {{owner.estimates.all.0.total_dogs}}
+                            {{owner.dogs.all.count}}
                             {% endif %}
                             
                         </td>
                         <td>
                             
                             {% for quote in owner.estimates.all.0.quotes.all %}
-                            <span> <a class='in_page dogs' href = '/edit_quote/{{quote.id}}/0/0'>{{quote.dog.name}}</a> [{{quote.dog.coat.name}}] [{{quote.service.name}}] [${{quote.total}}]</span>
+                            <span> <a class='in_page dogs' href = '/edit_quote/{{quote.id}}/0/0'>{{quote.dog.name}}</a>  [{{quote.service.name}} - ${{quote.total}}]</span>
                             {% endfor %}
                             
                         </td>
@@ -158,14 +158,14 @@
                         </td>
                         <td>
                             {% if owner.quotes.all %}
-                            {{owner.estimates.all.0.total_dogs}}
+                            {{owner.dogs.all.count}}
                             {% endif %}
                             
                         </td>
                         <td>
                             
                             {% for quote in owner.estimates.all.0.quotes.all %}
-                            <span> <a class='in_page dogs' href = '/edit_quote/{{quote.id}}/0/0'>{{quote.dog.name}}</a> [{{quote.dog.coat.name}}] [{{quote.service.name}}] [${{quote.total}}]</span>
+                            <span> <a class='in_page dogs' href = '/edit_quote/{{quote.id}}/0/0'>{{quote.dog.name}}</a>  [{{quote.service.name}} - ${{quote.total}}]</span>
                             {% endfor %}
                             
                         </td>

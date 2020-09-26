@@ -88,8 +88,21 @@ input.age {
     margin-top:50px;
 }
 .owner {
+    
+    width:100%;
     justify-content: space-evenly;
     display:flex;
+}
+
+.o_right {
+    width:40%;
+}
+
+.prev_dog {
+    width:150px;
+    display:flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
 }
 .coats {
     margin-top:50px;

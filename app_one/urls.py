@@ -23,15 +23,10 @@ urlpatterns = [
     path('coat_types', views.coat_types),
     path('dashboard', views.dashboard),
     #OWNER
-    # path('add_owner', views.add_owner),
     path('edit_owner/<int:owner_id>/<int:redirect_key>/<int:quote_id>/<int:estimate_id>', views.edit_owner),
-    # path('show_owner_info/<int:owner_id>', views.show_owner_info),
     #DOG
-    # path('show_dog_info/<int:dog_id>', views.show_dog_info),
-    # path('add_dog_to_owner/<int:owner_id>', views.add_dog_to_owner),
     path('edit_dog/<int:dog_id>', views.edit_dog),
     #ESTIMATE
-    # path('add_first_estimate_to_owner/<int:owner_id>', views.add_first_estimate_to_owner),
     path('add_quotes_to_estimate/<int:estimate_id>', views.add_quotes_to_estimate),
     path('add_first_estimate', views.add_first_estimate),
 
@@ -39,11 +34,7 @@ urlpatterns = [
     path('search', views.search),
 
     #QUOTE
-    # path('add_quote_to_dog/<int:dog_id>', views.add_quote_to_dog),
     path('edit_quote/<int:quote_id>/<int:redirect_key>/<int:estimate_id>', views.edit_quote),
-
-    #EXTRAS
-    # path('add_extras_to_quote/<int:quote_id>/<int:estimate_id>', views.add_extras_to_quote),
 
 
     #=============================================##
@@ -51,7 +42,7 @@ urlpatterns = [
     #=============================================##
     path('init_db_objects', views.init_db_objects),
     #OWNER
-    path('process_add_owner', views.process_add_owner),
+    # path('process_add_owner', views.process_add_owner),
     path('process_edit_owner/<int:owner_id>/<int:redirect_key>/<int:quote_id>/<int:estimate_id>', views.process_edit_owner),
     path('process_delete_owner/<int:owner_id>', views.process_delete_owner),
     #DOG
@@ -68,12 +59,5 @@ urlpatterns = [
 
     #QUOTE
     path('process_edit_quote/<int:quote_id>/<int:redirect_key>/<estimate_id>', views.process_edit_quote),
-    path('process_add_quote_to_dog/<int:dog_id>', views.process_add_quote_to_dog),
 
-    #EXTRAS
-    # path('process_add_extras_to_quote/<int:quote_id>/<int:estimate_id>', views.process_add_extras_to_quote),
-
-    
 ]
-
-    
