@@ -67,7 +67,10 @@ python manage.py runserver
 Any questions or comments about this repository and it's contents can be emailed to kmoreland909@gmail.com.
 
 ## Roadmap
-Currently this is a work in progress. As I get better and upgrade my projects or add new ones this website will be constantly updated to reflect that. Bookmark the deployment url for this site, KISMET-INC.github.io to see what I add to it in the future.
+In future updates I plan to:
+- add more services to the estimates like desheds and special shampoos
+-  a login and registration for business owners to access their individual clients and estimates
+- A feature that allows the estimates to be printed and/or emailed to the client
 
 ## Contributing
 I am not accepting contributions to this project at this time.
