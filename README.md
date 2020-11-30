@@ -25,7 +25,7 @@ git clone https://github.com/KISMET-INC/FairEst.git
 2. Download and Install **[Python 3.6.4](https://www.python.org/downloads/release/python-364/)** onto your machine.
 
 3. Be sure to Add Python 3.6 to PATH but checking the box at the bottom of the screen 
-- [x] Add Python 3.6 to PATH
+   - [x] Add Python 3.6 to PATH
 
 1. Create a virtual environment for the project.
 ```bash
